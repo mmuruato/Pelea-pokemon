@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Battle</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <datalist id="pokemon-list"></datalist>
+
+  <!-- ── PANTALLA 1: Selección ── -->
+  <div id="selection-screen" class="screen active">
+    <div class="logo">simulador de combate <span>Pokémon.</span></div>
+
+    <div class="pickers">
+      <div class="picker-box">
+        <label>Jugador 1</label>
+        <input type="text" id="poke1-input" list="pokemon-list" placeholder="pikachu" autocomplete="off">
+        <div class="picker-preview"><img id="preview1" src="" alt=""></div>
+      </div>
+
+      <div class="vs-label">vs</div>
+
+      <div class="picker-box">
+        <label>Jugador 2</label>
+        <input type="text" id="poke2-input" list="pokemon-list" placeholder="charizard" autocomplete="off">
+        <div class="picker-preview"><img id="preview2" src="" alt=""></div>
+      </div>
+    </div>
+
+    <button class="btn-start" onclick="iniciarBatalla()">Comenzar batalla</button>
+    <p class="hint">escribe el nombre exacto del pokémon</p>
+  </div>
+
+  <!-- ── PANTALLA 2: Batalla ── -->
+  <div id="battle-screen" class="screen">
+    <div class="battle-header">
+      <div class="logo">Pokémon.</div>
+      <div class="turn-badge" id="turn-badge">—</div>
+    </div>
+
+    <div class="arena">
+      <!-- Jugador 1 -->
+      <div class="p-card" id="card-p1">
+        <div class="p-name" id="p1-name">—</div>
+        <div class="p-img-wrap"><img id="p1-img" src="" alt="P1"></div>
+        <div class="hp-track">
+          <div class="hp-numbers">
+            <span class="hp-label">HP</span>
+            <span class="hp-value"><span id="p1-hp-text">100</span><small>%</small></span>
+          </div>
+          <div class="hp-rail"><div id="p1-hp-bar" class="hp-fill"></div></div>
+        </div>
+      </div>
+
+      <!-- Narrador central -->
+      <div class="narrator-col">
+        <div class="divider-vs">vs</div>
+        <div class="narrator-bubble">
+          <p id="narrator-text">Preparando combate…</p>
+        </div>
+      </div>
+
+      <!-- Jugador 2 -->
+      <div class="p-card" id="card-p2">
+        <div class="p-name" id="p2-name">—</div>
+        <div class="p-img-wrap"><img id="p2-img" src="" alt="P2"></div>
+        <div class="hp-track">
+          <div class="hp-numbers">
+            <span class="hp-label">HP</span>
+            <span class="hp-value"><span id="p2-hp-text">100</span><small>%</small></span>
+          </div>
+          <div class="hp-rail"><div id="p2-hp-bar" class="hp-fill"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Log de movimientos -->
+    <div class="log-section">
+      <div class="log-header">
+        <div class="log-dot"></div>
+        <span>registro de batalla</span>
+      </div>
+      <div class="log-body" id="log-list"></div>
+    </div>
+  </div>
+
+  <!-- ── PANTALLA 3: Ganador ── -->
+  <div id="winner-screen" class="screen">
+    <div class="winner-label">ganador</div>
+    <div class="winner-name" id="winner-name">—</div>
+    <div class="winner-img-wrap"><img id="winner-img" src="" alt="Ganador"></div>
+    <p class="winner-stats" id="winner-stats"></p>
+    <button class="btn-retry" onclick="location.reload()">Nueva batalla</button>
+  </div>
+
+  <!-- Scripts (el orden importa: api → battle → ui) -->
+  <script src="api.js"></script>
+  <script src="battle.js"></script>
+  <script src="ui.js"></script>
+
+</body>
+</html>
